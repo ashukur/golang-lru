@@ -87,9 +87,9 @@ func (c *Cache) Add(key, value interface{}) (evicted bool) {
 
 // Get looks up a key's value from the cache.
 func (c *Cache) Get(key interface{}) (value interface{}, ok bool) {
-	c.lock.Lock()
+	c.lock.RLock()
 	value, ok = c.lru.Get(key)
-	c.lock.Unlock()
+	c.lock.RUnlock()
 	return value, ok
 }
 
